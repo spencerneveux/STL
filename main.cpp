@@ -1,18 +1,20 @@
 #include "BigInt.hpp"
 #include <iostream>
+#include <stdexcept>
 using namespace std;
 BigInt goldRabbits(int);
 int fact(int);
 
 int main() {
-//  Main tester
+//     Main tester
     for (int n = 0; n <= 1000; n++) {
         cout << "\nThe GoldRabbit of ("<<n<<") is "<<goldRabbits(n);
-   }
+    }
     for (int i = 0; i < 100; i++) {
         try {
-            cout << "Fact("<<i<<"):"<<fact(i)<<endl;
-        }catch(...) {
+            int value = fact(i);
+            cout << "Fact("<<i<<"):"<<value<<endl;
+        }catch(exception) {
             cout << "Fact("<<i<<"):"<<"Overflow"<<endl;
         }
     }
@@ -31,8 +33,11 @@ BigInt goldRabbits(int n) {
 }
 
 int fact(int n) {
-    if (n == 1)
-        return 1;
-    else
-        return (n*fact(n-1));
+    if (n >= 13)
+        throw exception();
+    int factorial = 1;
+    for (int i = 1; i <= n; i++) {
+        factorial *= i;
+    }
+    return factorial;
 }
